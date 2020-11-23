@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Common;
+use App\Models\Services;
+use App\Models\Team;
+use App\Models\Portfolio;
+use App\Models\About;
 use Illuminate\Http\Request;
 
 class CommonController extends Controller
@@ -12,9 +16,13 @@ class CommonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function totalCount()
     {
-        //
+        $total_services = Services::all();
+        $total_about = Team::all();
+        $total_portfolio = Portfolio::all();
+        $total_teams = About::all();
+        return view('dashboard.layouts.dashboard', compact('total_services','total_about','total_portfolio','total_teams'));
     }
 
     /**

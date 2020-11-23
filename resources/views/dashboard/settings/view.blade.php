@@ -1,8 +1,8 @@
 @extends('dashboard.layouts.common')
 
-@section('title', 'Edit Settings')   
+@section('title', 'Update Settings')   
 @section('common')
-<form action="{{route('settings.update', $settings->id)}}" method="POST">
+<form action="{{route('settings.update')}}" method="POST">
     @csrf
     @method('PUT')
         <div class="form-group">

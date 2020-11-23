@@ -17,7 +17,6 @@
             <td><img style="width:100px" src="{{asset($service->image)}}" alt=""></td>
             <td>{{$service->description}}</td>
             <td>
-                <a href="{{route('services.show', $service->id)}}" class="btn btn-primary">View</a>
                 <a href="{{route('services.edit', $service->id)}}" class="btn btn-info">Edit</a>
                 <form action="{{route('services.destroy', $service->id)}}" method="POST">
                     @csrf

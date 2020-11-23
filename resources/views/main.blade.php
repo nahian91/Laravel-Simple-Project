@@ -36,20 +36,31 @@
                 </div>
             </div>
         </nav>
-        <!-- Masthead-->
-        <header class="masthead" style="background-image: url({{$top->image}})">
+        <!-- Masthead--> 
+        <header class="masthead" style="background-image: url(@if ($top->image) {{$top->image}} @endif)">
             <div class="container">
-                <div class="masthead-subheading">{{$top->sub_title}}</div>
-                <div class="masthead-heading text-uppercase">{{$top->title}}</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{$top->link}}">Tell Me More</a>
+                <div class="masthead-subheading">                    
+                    @if ($top->sub_title)
+                        {{$top->sub_title}}
+                    @endif
+                </div>
+                <div class="masthead-heading text-uppercase">
+                    @if ($top->title)
+                        {{$top->title}}
+                    @endif
+                </div>
+                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="@if ($top->link) {{$top->link}}
+                @endif">Tell Me More</a>
             </div>
         </header>
         <!-- Services-->
         <section class="page-section" id="services">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">{{$settings[0]->services_title}}</h2>
-                    <h3 class="section-subheading text-muted">{{$settings[0]->services_description}}</h3>
+                    <h2 class="section-heading text-uppercase">@if  ($settings->services_title) {{$settings->services_title}} @endif</h2>
+                    <h3 class="section-subheading text-muted">@if ($settings->services_description)
+                        {{$settings->services_description}}
+                    @endif</h3>
                 </div>
                 <div class="row text-center">                    
                     @foreach ($services as $service)
@@ -66,8 +77,12 @@
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">{{$settings[0]->portfolio_title}}</h2>
-                    <h3 class="section-subheading text-muted">{{$settings[0]->portfolio_description}}</h3>
+                    <h2 class="section-heading text-uppercase">@if ($settings->portfolio_title)
+                        {{$settings->portfolio_title}}
+                    @endif</h2>
+                    <h3 class="section-subheading text-muted">@if ($settings->portfolio_description)
+                        {{$settings->portfolio_description}}
+                    @endif</h3>
                 </div>
                 <div class="row">
 
@@ -132,8 +147,12 @@
         <section class="page-section" id="about">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">{{$settings[0]->about_title}}</h2>
-                    <h3 class="section-subheading text-muted">{{$settings[0]->about_description}}</h3>
+                    <h2 class="section-heading text-uppercase">@if ($settings->about_title)
+                        {{$settings->about_title}}
+                    @endif</h2>
+                    <h3 class="section-subheading text-muted">@if ($settings->about_description)
+                        {{$settings->about_description}}
+                    @endif</h3>
                 </div>
                 <ul class="timeline">
 
@@ -159,40 +178,37 @@
         <section class="page-section bg-light" id="team">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">{{$settings[0]->team_title}}</h2>
-                    <h3 class="section-subheading text-muted">{{$settings[0]->team_decription}}</h3>
+                    <h2 class="section-heading text-uppercase">@if ($settings->team_title)
+                        {{$settings->team_title}}
+                    @endif</h2>
+                    <h3 class="section-subheading text-muted">@if ($settings->team_decription)
+                        {{$settings->team_decription}}
+                    @endif</h3>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="" />
-                            <h4>Kay Garland</h4>
-                            <p class="text-muted">Lead Designer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/2.jpg" alt="" />
-                            <h4>Larry Parker</h4>
-                            <p class="text-muted">Lead Marketer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="" />
-                            <h4>Diana Petersen</h4>
-                            <p class="text-muted">Lead Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
+
+                    @foreach ($teams as $team)
+                        <div class="col-lg-4">
+                            <div class="team-member">
+                                <img class="mx-auto rounded-circle" src="{{asset($team->image)}}" alt="" />
+                                <h4>{{$team->title}}</h4>
+                                <p class="text-muted">{{$team->designation}}</p>
+                                @if ($team->tw_link)
+                                    <a class="btn btn-dark btn-social mx-2" href="{{$team->tw_link}}"><i class="fab fa-twitter"></i></a>
+                                @endif
+
+                                @if ($team->fb_link)
+                                    <a class="btn btn-dark btn-social mx-2" href="{{$team->fb_link}}"><i class="fab fa-facebook-f"></i></a>
+                                @endif
+
+                                @if ($team->ln_link)
+                                    <a class="btn btn-dark btn-social mx-2" href="{{$team->ln_link}}"><i class="fab fa-linkedin-in"></i></a>
+                                @endif
+                            </div>
+                        </div>                        
+                    @endforeach
+
+
                 </div>
                 <div class="row">
                     <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
@@ -222,8 +238,12 @@
         <section class="page-section" id="contact">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">{{$settings[0]->contact_title}}</h2>
-                    <h3 class="section-subheading text-muted">{{$settings[0]->contact_description}}</h3>
+                    <h2 class="section-heading text-uppercase">@if ($settings->contact_title)
+                        {{$settings->contact_title}}
+                    @endif</h2>
+                    <h3 class="section-subheading text-muted">@if ($settings->contact_description)
+                        {{$settings->contact_description}}
+                    @endif</h3>
                 </div>
                 <form id="contactForm" name="sentMessage" novalidate="novalidate">
                     <div class="row align-items-stretch mb-5">
@@ -259,11 +279,19 @@
         <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-left">Copyright © Your Website 2020</div>
+                    <div class="col-lg-4 text-lg-left">@if ($footer->copyright)
+                        {{$footer->copyright}}
+                    @endif</div>
                     <div class="col-lg-4 my-3 my-lg-0">
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="@if ($footer->tw_link)
+                        {{$footer->tw_link}}
+                        @endif"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="@if ($footer->fb_link)
+                        {{$footer->fb_link}}
+                        @endif"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="@if ($footer->ln_link)
+                        {{$footer->ln_link}}
+                        @endif"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                     <div class="col-lg-4 text-lg-right">
                         <a class="mr-3" href="#!">Privacy Policy</a>

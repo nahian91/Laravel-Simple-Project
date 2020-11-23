@@ -10,6 +10,8 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\CommonController;
+use App\Http\Controllers\FooterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,16 +24,21 @@ use App\Http\Controllers\SettingsController;
 |
 */
 Route::get('/', [FrontController::class, 'index']);
+Route::get('/dashboard', [CommonController::class, 'totalCount'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-});
+Route::get('/dashboard/top', [TopController::class, 'index'])->name('top.view');
+Route::put('/dashboard/top', [TopController::class, 'update'])->name('top.update');
+
+Route::get('/dashboard/settings', [SettingsController::class, 'index'])->name('settings.view');
+Route::put('/dashboard/settings', [SettingsController::class, 'update'])->name('settings.update');
+
+Route::get('/dashboard/footer', [FooterController::class, 'index'])->name('footer.view');
+Route::put('/dashboard/footer', [FooterController::class, 'update'])->name('footer.update');
+
 
 Route::resource('/dashboard/services', ServicesController::class);
 Route::resource('/dashboard/about', AboutController::class);
-Route::resource('/dashboard/top', TopController::class);
 Route::resource('/dashboard/portfolio', PortfolioController::class);
 Route::resource('/dashboard/team', TeamController::class);
 Route::resource('/dashboard/category', CategoryController::class);
 Route::resource('/dashboard/clients', ClientsController::class);
-Route::resource('/dashboard/settings', SettingsController::class);

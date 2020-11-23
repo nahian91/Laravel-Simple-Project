@@ -43,7 +43,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{route('dashboard')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -53,7 +53,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="{{route('top.create')}}">
+                <a class="nav-link" href="{{route('top.view')}}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Top Bannar</span></a>
             </li>
@@ -127,13 +127,13 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="{{route('footer.view')}}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Footer</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{route('settings.create')}}">
+                <a class="nav-link" href="{{route('settings.view')}}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Settings</span></a>
             </li>

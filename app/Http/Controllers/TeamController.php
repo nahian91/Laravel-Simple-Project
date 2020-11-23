@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TeamController extends Controller
 {
@@ -14,7 +15,8 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
+        $teams = Team::all();
+        return view('dashboard.teams.index', compact('teams'));
     }
 
     /**
@@ -24,7 +26,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.teams.create');
     }
 
     /**
@@ -35,7 +37,20 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $team  = new Team;
+        $team->title = $request->title;
+        $team->designation = $request->designation;
+        $team->tw_link = $request->tw_link;
+        $team->fb_link = $request->fb_link;
+        $team->ln_link = $request->ln_link;
+
+        $small_file = $request->file('image');
+        Storage::putFile('public/img/', $small_file);
+        $team->image = "storage/img/".$small_file->hashName();
+
+        $team->save();
+
+        return redirect()->route('team.index');
     }
 
     /**

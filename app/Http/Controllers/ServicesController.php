@@ -41,9 +41,11 @@ class ServicesController extends Controller
         $service->title = $request->title;
         $service->description = $request->description;
 
-        $service_file = $request->file('image');
-        Storage::putFile('public/img/', $service_file);
-        $service->image = "storage/img/".$service_file->hashName();
+        if($request->file('image')){
+            $service_file = $request->file('image');
+            Storage::putFile('public/img/', $service_file);
+            $service->image = "storage/img/".$service_file->hashName();
+        }
 
         $service->save();
 
@@ -86,9 +88,11 @@ class ServicesController extends Controller
         $service->title = $request->title;
         $service->description = $request->description;
 
-        $service_file = $request->file('image');
-        Storage::putFile('public/img/', $service_file);
-        $service->image = "storage/img/".$service_file->hashName();
+        if($request->file('image')){
+            $service_file = $request->file('image');
+            Storage::putFile('public/img/', $service_file);
+            $service->image = "storage/img/".$service_file->hashName();
+        }
 
         $service->save();
 
